@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="action_settings">Settings</string>
+    <string-array name="pswd_len_name">
+        <item>8</item>
+        <item>10</item>
+        <item>12</item>
+    </string-array>
+    <string name="acceptable_chars">abcdefghijklmnopqrstyvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!#%/()</string>
+</resources>
