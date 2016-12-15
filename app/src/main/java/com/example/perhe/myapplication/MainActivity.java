@@ -13,8 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     public final static String EXTRA_MESSAGE = "com.example.perhe.myapplication.MESSAGE";
@@ -50,7 +49,16 @@ public class MainActivity extends AppCompatActivity {
                 // Clear previous passwords
                 layout.removeAllViews();
 
-                new GeneratePasswords(allChars, pswdLen, layout).invoke();
+                List<String> pwrds = new GeneratePasswords(allChars, pswdLen).generate();
+
+                TextView tv = new TextView(findViewById(R.id.layoutPasswords).getContext());
+                //tv.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+                for(String st: pwrds)
+                {
+                    tv.setText(st);
+                }
+
+                layout.addView(tv);
 
             }
         });
@@ -85,41 +93,4 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private class GeneratePasswords {
-        private String allChars;
-        private int pswdLen;
-        private ViewGroup layout;
-
-        public GeneratePasswords(String allChars, int pswdLen, ViewGroup layout) {
-            this.allChars = allChars;
-            this.pswdLen = pswdLen;
-            this.layout = layout;
-        }
-
-        public void invoke() {
-            try {
-                SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
-
-                for(int j=0; j<20; j++) {
-
-                    StringBuffer buf = new StringBuffer();
-
-                    for(int i=0; i<pswdLen; i++) {
-                        Integer val = sr.nextInt(allChars.length());
-                        buf.append(allChars.charAt(val));
-                    }
-                    String str = buf.toString();
-                    TextView tv = new TextView(findViewById(R.id.layoutPasswords).getContext());
-                    //tv.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-                    tv.setText(str);
-                    layout.addView(tv);
-                }
-
-            } catch (NoSuchAlgorithmException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-                // Use normal random or something
-            }
-        }
-    }
 }
