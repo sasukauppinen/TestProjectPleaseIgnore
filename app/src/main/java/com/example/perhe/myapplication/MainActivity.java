@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -51,14 +52,18 @@ public class MainActivity extends AppCompatActivity {
 
                 List<String> pwrds = new GeneratePasswords(allChars, pswdLen).generate();
 
-                TextView tv = new TextView(findViewById(R.id.layoutPasswords).getContext());
+                //List<TextView> tvs = new ArrayList<>();
+
+                //TextView tv = new TextView(findViewById(R.id.layoutPasswords).getContext());
                 //tv.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
                 for(String st: pwrds)
                 {
+                    TextView tv = new TextView(findViewById(R.id.layoutPasswords).getContext());
                     tv.setText(st);
+                    layout.addView(tv);
                 }
 
-                layout.addView(tv);
+                //layout.addView(tv);
 
             }
         });
